@@ -5,7 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>logo.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>潘语翻译</title>
+    <style>
+      html, body {
+          height: 100%;
+          margin: 0;
+      }
+
+      body {
+          display: flex;
+          flex-direction: column;
+      }
+
+      #app {
+          flex: 1;
+      }
+
+      footer {
+          text-align: center;
+          padding: 10px;
+          position: relative;
+          bottom: 0;
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -13,5 +35,11 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <footer style="text-align: center">
+        <p>潘语翻译</p>
+        <p>注：本页面潘语翻译器用于日常交流或工作上的需要，如需更详细的潘潘翻译服务，请联系潘星国大使馆。</p>
+        <p>© 2024 Made with by <a href="https://github.com/Jeromest">毛豆</a> |
+            <a href="https://github.com/shilinhua">诺诺</a></p>
+    </footer>
   </body>
 </html>
