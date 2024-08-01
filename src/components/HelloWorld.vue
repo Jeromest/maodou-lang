@@ -1,6 +1,11 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <div class="translation-app">
+        <div class="header-content">
+          <img src="@/assets/logo.jpg" alt="" width="70px">
+          <h1>潘语翻译</h1>
+        </div>
+    </div>
     <el-input v-model="custom" clearable placeholder="自定义叫声，默认为喵"
       ><template slot="prepend">自定义叫声：</template></el-input
     >
@@ -37,6 +42,9 @@ export default {
       custom: "喵",
     };
   },
+  mounted() {
+    document.title = '潘语翻译'; // 设置标签页标题
+  },
   methods: {
     h2m() {
       let human_msg = this.input;
@@ -71,5 +79,24 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
+}
+.translation-app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  padding: 20px;
+}
+
+header {
+  padding: 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center; /* 垂直居中 */
+}
+
+.header-content img {
+  margin-right: 10px;
 }
 </style>

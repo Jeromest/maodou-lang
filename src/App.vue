@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="maodou-lang"/>
+    <HelloWorld msg="潘语翻译"/>
   </div>
 </template>
 
@@ -22,6 +22,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
