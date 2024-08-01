@@ -34,7 +34,7 @@ export default {
   methods: {
     h2m() {
       let human_msg = this.input;
-      let miao_msg = Miao.encode(human_msg.trim, { calls: this.custom });
+      let miao_msg = Miao.encode(human_msg, { calls: this.custom });
       this.output = miao_msg;
     },
     m2h() {
