@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - master # 注意这里有的是main，一定要跟github的分支名称一致
 
 jobs:
   build-and-deploy:
@@ -27,6 +27,6 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}   # 这里一定要申请github personal token，不然推不到gh-pages分支
           publish_dir: ./dist
           force_orphan: true
