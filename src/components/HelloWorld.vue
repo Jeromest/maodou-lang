@@ -42,9 +42,6 @@ export default {
       custom: "喵",
     };
   },
-  mounted() {
-    document.title = '潘语翻译'; // 设置标签页标题
-  },
   methods: {
     h2m() {
       let human_msg = this.input;
