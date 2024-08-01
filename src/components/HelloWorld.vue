@@ -1,58 +1,69 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <el-input v-model="custom" clearable placeholder="自定义叫声，默认为喵"
+      ><template slot="prepend">自定义叫声：</template></el-input
+    >
+
+    <el-input v-model="input" @input="h2m" clearable placeholder="这里输入人话">
+      <template slot="prepend">人话：</template>
+    </el-input>
+
+    <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
+      ><template slot="prepend">喵语：</template></el-input
+    >
+    <el-button @click="copyText" type="primary">复制</el-button>
   </div>
 </template>
 
 <script>
+import Miao from "miao-lang";
+import Clipboard from "clipboard";
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+  data() {
+    return {
+      input: "",
+      output: "",
+      custom: "喵",
+    };
+  },
+  methods: {
+    h2m() {
+      let human_msg = this.input;
+      let miao_msg = Miao.encode(human_msg.trim, { calls: this.custom });
+      this.output = miao_msg;
+    },
+    m2h() {
+      let miao_msg = this.output;
+      let msg2 = Miao.decode(miao_msg);
+      if (msg2 != null && msg2 != "") {
+        this.input = msg2;
+      } else {
+        this.input = "哪里来的外乡喵，听不懂思密达~";
+      }
+    },
+    copyText() {
+      const clipboard = new Clipboard(".btn", {
+        text: function () {
+          return this.output;
+        },
+      });
+      clipboard.on("success", function () {
+        this.$message.success("复制成功");
+      });
+      clipboard.on("error", function () {
+        this.$message.error("复制失败");
+      });
+    },
+  },
+};
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>
