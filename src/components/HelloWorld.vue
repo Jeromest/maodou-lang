@@ -18,12 +18,6 @@
       ><template slot="prepend">喵语：</template></el-input
     >
      <el-button @click="copyText" type="primary">复制</el-button>
-    <footer>
-      <p>潘语翻译</p>
-      <p>注：本页面潘语翻译器用于日常交流或工作上的需要，如需更详细的潘潘翻译服务，请联系潘星国大使馆。</p>
-      <p>© 2024 Made with by <a href="https://github.com/Jeromest">毛豆</a> |
-        <a href="https://github.com/shilinhua">诺诺</a></p>
-    </footer>
   </div>
 </template>
 
