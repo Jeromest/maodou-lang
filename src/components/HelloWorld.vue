@@ -12,7 +12,7 @@
     <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
       ><template slot="prepend">喵语：</template></el-input
     >
-    <el-button @click="copyText" type="primary">复制</el-button>
+    <!-- <el-button @click="copyText" type="primary">复制</el-button> -->
   </div>
 </template>
 
