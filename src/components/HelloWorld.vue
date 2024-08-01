@@ -14,7 +14,7 @@
       <template slot="prepend">人话：</template>
     </el-input>
 
-    <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
+    <el-input v-model="output" @input="m2h" @clear="clearText" clearable placeholder="这里输入喵语"
       ><template slot="prepend">喵语：</template></el-input
     >
      <el-button @click="copyText" type="primary">复制</el-button>
@@ -23,7 +23,6 @@
 
 <script>
 import Miao from "miao-lang";
-// import Clipboard from "clipboard";
 export default {
   name: "HelloWorld",
   props: {
@@ -52,13 +51,18 @@ export default {
       }
     },
     copyText() {
-      navigator.clipboard.writeText(this.output).then(() => {
-        this.$message.success("复制成功");
-      }).catch(err => {
-        console.log(err)
-        this.$message.error("复制失败");
-      });
+      if (this.output != "") {
+        navigator.clipboard.writeText(this.output).then(() => {
+          this.$message.success("复制成功");
+        }).catch(err => {
+          console.log(err)
+          this.$message.error("复制失败");
+        });
+      }
     },
+    clearText() {
+      this.input = "";
+    }
   },
 };
 </script>
