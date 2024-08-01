@@ -49,7 +49,7 @@ export default {
     copyText() {
       const clipboard = new Clipboard(".btn", {
         text: function () {
-          return this.output; 
+          return this.output;
         },
       });
       clipboard.on("success", function () {
