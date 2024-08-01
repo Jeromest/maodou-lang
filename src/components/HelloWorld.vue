@@ -17,7 +17,7 @@
     <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
       ><template slot="prepend">喵语：</template></el-input
     >
-    <!-- <el-button @click="copyText" type="primary">复制</el-button> -->
+     <el-button @click="copyText" type="primary">复制</el-button>
     <footer>
       <p>潘语翻译</p>
       <p>注：本页面潘语翻译器用于日常交流或工作上的需要，如需更详细的潘潘翻译服务，请联系潘星国大使馆。</p>
@@ -29,7 +29,7 @@
 
 <script>
 import Miao from "miao-lang";
-import Clipboard from "clipboard";
+// import Clipboard from "clipboard";
 export default {
   name: "HelloWorld",
   props: {
@@ -61,15 +61,10 @@ export default {
       }
     },
     copyText() {
-      const clipboard = new Clipboard(".btn", {
-        text: function () {
-          return this.output;
-        },
-      });
-      clipboard.on("success", function () {
+      navigator.clipboard.writeText(this.output).then(() => {
         this.$message.success("复制成功");
-      });
-      clipboard.on("error", function () {
+      }).catch(err => {
+        console.log(err)
         this.$message.error("复制失败");
       });
     },
