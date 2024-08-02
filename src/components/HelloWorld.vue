@@ -59,7 +59,6 @@
 
 <script>
 import Miao from "miao-lang";
-// import Clipboard from "clipboard";
 export default {
   name: "HelloWorld",
   props: {
@@ -95,13 +94,18 @@ export default {
       }
     },
     copyText() {
-      navigator.clipboard.writeText(this.output).then(() => {
-        this.$message.success("复制成功");
-      }).catch(err => {
-        console.log(err)
-        this.$message.error("复制失败");
-      });
+      if (this.output != "") {
+        navigator.clipboard.writeText(this.output).then(() => {
+          this.$message.success("复制成功");
+        }).catch(err => {
+          console.log(err)
+          this.$message.error("复制失败");
+        });
+      }
     },
+    clearText() {
+      this.input = "";
+    }
   },
 };
 </script>
