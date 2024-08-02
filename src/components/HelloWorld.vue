@@ -15,10 +15,10 @@
               <button class="renhuabutton">😊 人话</button>
             </div>
             <div v-else>
-                <button class="panhuabutton">😎 潘话</button>
+                <button class="panhuabutton">😎 潘语</button>
             </div>
             <span class="jiaohuanspan"></span>
-            <button class="jiaohuanbutton" @click="jiaohuan">交换</button>
+            <button class="jiaohuanbutton" @click="swap">交换</button>
           </div>
           <div v-if="!swapped">
             <textarea placeholder="在这儿输入你想翻译的内容" class="textarea1" v-model="input" @input="h2m" clearable></textarea>
@@ -31,7 +31,7 @@
           <div class="div00112">
             <span>输出</span>
             <div v-if="!swapped">
-              <button class="panhuabutton">😎 潘话</button>
+              <button class="panhuabutton">😎 潘语</button>
             </div>
             <div v-else>
               <button class="renhuabutton">😊 人话</button>
@@ -73,7 +73,7 @@ export default {
     };
   },
   methods: {
-    jiaohuan() {
+    swap() {
       this.swapped = !this.swapped;
       let temp = this.input;
       this.input = this.output;
