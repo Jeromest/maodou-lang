@@ -11,20 +11,35 @@
         <div class="div0011">
           <div class="div00111">
             <span>输入</span>
-            <button class="renhuabutton">😊 人话</button>
+            <div v-if="!swapped">
+              <button class="renhuabutton">😊 人话</button>
+            </div>
+            <div v-else>
+                <button class="panhuabutton">😎 潘话</button>
+            </div>
             <span class="jiaohuanspan"></span>
-            <button class="jiaohuanbutton">交换</button>
+            <button class="jiaohuanbutton" @click="jiaohuan">交换</button>
           </div>
-          <textarea placeholder="在这儿输入你想翻译的内容" class="textarea1"></textarea>
+          <div v-if="!swapped">
+            <textarea placeholder="在这儿输入你想翻译的内容" class="textarea1" v-model="input" @input="h2m" clearable></textarea>
+          </div>
+          <div v-else>
+            <textarea placeholder="在这儿输入你想翻译的内容" class="textarea1" v-model="input" @input="m2h" clearable></textarea>
+          </div>
         </div>
         <div class="div0012">
           <div class="div00112">
             <span>输出</span>
-            <button class="panhuabutton">😎 潘话</button>
+            <div v-if="!swapped">
+              <button class="panhuabutton">😎 潘话</button>
+            </div>
+            <div v-else>
+              <button class="renhuabutton">😊 人话</button>
+            </div>
             <span class="fuzhispan1"></span><span class="fuzhispan2"></span>
-            <button class="fuzhibutton"><span>复制</span></button>
+            <button class="fuzhibutton" @click="copyText"><span>复制</span></button>
           </div>
-          <textarea id="output" readonly class="textarea2"></textarea></div>
+          <textarea id="output" readonly class="textarea2" v-model="output" clearable></textarea></div>
       </div>
       <!--      <el-input v-model="custom" clearable placeholder="自定义叫声，默认为喵"-->
       <!--      ><template slot="prepend">自定义叫声：</template></el-input-->
@@ -54,22 +69,29 @@ export default {
     return {
       input: "",
       output: "",
-      custom: "喵",
+      custom: "潘",
+      swapped: false,
     };
   },
   methods: {
+    jiaohuan() {
+      this.swapped = !this.swapped;
+      let temp = this.input;
+      this.input = this.output;
+      this.output = temp;
+    },
     h2m() {
       let human_msg = this.input;
       let miao_msg = Miao.encode(human_msg, {calls: this.custom});
       this.output = miao_msg;
     },
     m2h() {
-      let miao_msg = this.output;
+      let miao_msg = this.input;
       let msg2 = Miao.decode(miao_msg);
       if (msg2 != null && msg2 != "") {
-        this.input = msg2;
+        this.output = msg2;
       } else {
-        this.input = "哪里来的外乡喵，听不懂思密达~";
+        this.output = "听不懂潘潘在说什么~";
       }
     },
     copyText() {
