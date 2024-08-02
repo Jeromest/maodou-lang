@@ -6,18 +6,20 @@
           <h1>潘语翻译</h1>
         </div>
     </div>
-    <el-input v-model="custom" clearable placeholder="自定义叫声，默认为喵"
+    <div class="content">
+      <el-input v-model="custom" clearable placeholder="自定义叫声，默认为喵"
       ><template slot="prepend">自定义叫声：</template></el-input
-    >
+      >
 
-    <el-input v-model="input" @input="h2m" clearable placeholder="这里输入人话">
-      <template slot="prepend">人话：</template>
-    </el-input>
+      <el-input v-model="input" @input="h2m" clearable placeholder="这里输入人话">
+        <template slot="prepend">人话：</template>
+      </el-input>
 
-    <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
+      <el-input v-model="output" @input="m2h" clearable placeholder="这里输入喵语"
       ><template slot="prepend">喵语：</template></el-input
-    >
-     <el-button @click="copyText" type="primary">复制</el-button>
+      >
+      <el-button @click="copyText" type="primary">复制</el-button>
+    </div>
   </div>
 </template>
 
@@ -63,6 +65,12 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  height: 550px;
+  background-image: url('@/assets/background-image.png');
+  background-position: center;
+}
+
 h3 {
   margin: 40px 0 0;
 }
